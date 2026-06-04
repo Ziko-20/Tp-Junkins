@@ -1,7 +1,8 @@
 pipeline {
     agent {
         docker { 
-            image 'chialab/php:8.2-fpm'
+            // MODIFICATION ICI : On passe de 8.2 à 8.4 pour satisfaire Laravel et Symfony
+            image 'chialab/php:8.4-fpm'
             args '-u root'
         }
     }
@@ -20,7 +21,6 @@ pipeline {
         stage('Initialisation PHP') {
             steps {
                 echo 'Installation des dépendances PHP...'
-                // La correction est bien appliquée ici sans conflit
                 sh 'composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist'
                 
                 echo 'Configuration du fichier .env de test...'
